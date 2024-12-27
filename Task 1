@@ -1,9 +1,10 @@
+# Import necessary libraries
 import numpy as np
 import pandas as pd 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-# Dataset
+# Create a sample dataset
 data = {
     "Size (sq ft)": [850, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2500, 2800],
     "Bedrooms": [2, 2, 3, 3, 3, 4, 4, 4, 5, 5],
@@ -13,18 +14,18 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Splitting data into x and y 
+# Split data into features (X) and target (y) 
 x = df[["Size (sq ft)", "Bedrooms", "Bathrooms"]]
 y = df["Price"]
 
-# Splitting the data into training and testing set
+# Split the dataset into training and testing sets
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 42)
 
 # Create and fit the model
 model = LinearRegression()
 model.fit(x_train, y_train)
 
-# Predicting the price of house based on their square footage and the number of bedrooms and bathrooms
+# Use the model for new predictions
 house_feature = np.array([[3400, 5, 2]])
 predicted_price = model.predict(house_feature)
 print(f"Predicted price for a 3400 sq ft house with 5 bedrooms and 2 bathrooms: ${predicted_price[0]:,.2f}")
