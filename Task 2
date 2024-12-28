@@ -1,0 +1,42 @@
+# Importing necessary libraries
+import pandas as pd
+import numpy as np
+from sklearn.cluster import KMeans
+
+# Createing the dataset
+data = np.array([
+    [200, 300, 150],  # Customer 1
+    [50, 500, 100],   # Customer 2
+    [300, 200, 400],  # Customer 3
+    [20, 600, 50],    # Customer 4
+    [500, 100, 300],  # Customer 5
+    [400, 300, 200],  # Customer 6
+    [100, 50, 50],    # Customer 7
+    [50, 250, 80],    # Customer 8
+    [600, 100, 400],  # Customer 9
+    [300, 400, 300]   # Customer 10
+])
+
+# Number of clusters (K)
+k = 3 
+
+# Applying K-Means clustering
+kmeans = KMeans(n_clusters = k, random_state = 42)
+kmeans.fit(data)
+
+# Cluster assignments
+clusters = kmeans.labels_ 
+
+# Cluster centroids
+centroids = kmeans.cluster_centers_
+
+# Maping customers to their clusters
+customer_names = [ "customer1", "customer2", "customer3", "customer4", "customer5", "customer6", "customer7", "customer8", "customer9", "customer10" ]
+result = pd.DataFrame( {"Customer": customer_names, "cluster": clusters  } )
+
+# Printing results
+print("Cluster Assignments for Customers:")
+print(result)
+
+print("\nCluster Centroids(Buying patterns):")
+print(centroids)
